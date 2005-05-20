@@ -51,9 +51,10 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_psyche_OBJECTS = psyche.$(OBJEXT)
+am_psyche_OBJECTS = psyche.$(OBJEXT) error.$(OBJEXT) utils.$(OBJEXT) \
+	windows.$(OBJEXT) workspace.$(OBJEXT)
 psyche_OBJECTS = $(am_psyche_OBJECTS)
-psyche_LDADD = $(LDADD)
+psyche_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
@@ -166,13 +167,14 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-psyche_SOURCES = psyche.c
+psyche_SOURCES = psyche.c error.c utils.c windows.c workspace.c
 
 # set the include path found by configure
 INCLUDES = $(all_includes)
 
 # the library search path.
 psyche_LDFLAGS = $(all_libraries) 
+psyche_LDADD = -lpanel -lcdk -lcurses
 all: all-am
 
 .SUFFIXES:
@@ -244,7 +246,11 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/psyche.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/windows.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/workspace.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \

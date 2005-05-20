@@ -30,8 +30,10 @@
 
 int main(int argc, char *argv[])
 {
-	PSY_WSPACE *wpsace;
-	PSY_WIN *testwin;
+	PSY_WSPACE *wspace;
+	
+	/* wspace = workspace_create("workspace");
+ window_create("prova", "ciao", 20, 20, 10, 10, wspace->head);  */
 	
 	return EXIT_SUCCESS;
 }

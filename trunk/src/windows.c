@@ -52,7 +52,7 @@ window_has_shad(PSY_WIN *win, bool has_shad)
 	
 	win->has_shad = has_shad;
 	
-	if(win->has_shad==f)
+	if(win->has_shad == f)
 		hide_panel(win->pshad);
 	else {
 		show_panel(win->pshad);	
@@ -67,20 +67,20 @@ window_showbar(PSY_WIN *win, bool has_tbar)
 
 	win->has_tbar = has_tbar;
 	
-	if(win->has_tbar==f) { /* hide bar */
+	if(win->has_tbar == f) { /* hide bar */
 		mvwhline(win->wbody, 0, 1, 0, getmaxx(win->wbody)-2);
 		mvwaddch(win->wbody, 0, 0, '+');
 		mvwaddch(win->wbody, 0, getmaxx(win->wbody)-1, '+');
 	} else { /* show bar */
 		wattron(win->wbody, COLOR_PAIR(29) | A_BOLD);
 		mvwhline(win->wbody, 0, 0, 32, getmaxx(win->wbody));
-		if(win->has_close==t)
+		if(win->has_close == t)
 			mvwprintw(win->wbody, 0, 0, "[x]");
 
-		if(win->has_opt==t)
+		if(win->has_opt == t)
 			mvwprintw(win->wbody, 0, win->has_close*3, "[o]");
 
-		if(win->has_min==t)
+		if(win->has_min == t)
 			mvwprintw(win->wbody, 0, 
 				  3 * (win->has_close + win->has_opt), "[_]");
 
@@ -134,7 +134,7 @@ window_is_res(PSY_WIN *win, bool is_res)
 	
 	win->is_res = is_res;
 	
-	if(win->is_res==t) {  /* show resize button */
+	if(win->is_res == t) {  /* show resize button */
 		wattron(win->wbody, COLOR_PAIR(29) | A_BOLD);
 		mvwprintw(win->wbody, getmaxy(win->wbody)-1, 
 			  getmaxx(win->wbody)-2, "<>");
@@ -173,7 +173,7 @@ window_free(PSY_WIN *win, PSY_WIN *head)
 	
 	assert(win);
 	
-	for(tmp=head; tmp->next!=win; tmp->next);
+	for(tmp = head; tmp->next != win; tmp->next);
 	tmp->next = win->next;
 
 	window_del(win);

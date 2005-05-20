@@ -26,6 +26,7 @@ typedef struct winnode {
 /* init a window */
 PSY_WIN *window_create(const char *ctitle, const char *title, int sizey,
 		       int sizex, int posy, int posx, PSY_WIN *head);
+
 /* window properties */
 void window_has_shad(PSY_WIN *win, bool has_shad);
 void window_showbar(PSY_WIN *win, bool has_tbar);
@@ -34,8 +35,10 @@ void window_has_min(PSY_WIN *win, bool has_min);
 void window_has_opt(PSY_WIN *win, bool has_opt);
 void window_is_res(PSY_WIN *win, bool is_res);
 void window_is_mov(PSY_WIN *win, bool is_mov);
+
 /* edit title */
 void window_title(PSY_WIN *win, const char *title);
+
 /* destroy a window */
 void window_del(PSY_WIN *win);
 void window_free(PSY_WIN *win, PSY_WIN *head);

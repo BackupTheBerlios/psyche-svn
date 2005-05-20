@@ -3,7 +3,7 @@
 #---------------------------------------------------------------------------
 # Project related configuration options
 #---------------------------------------------------------------------------
-PROJECT_NAME           = psyche.kdevelop
+PROJECT_NAME           = psyche
 PROJECT_NUMBER         = 0.1
 OUTPUT_DIRECTORY       = 
 CREATE_SUBDIRS         = NO
