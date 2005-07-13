@@ -14,6 +14,7 @@
 
 @SET_MAKE@
 
+
 SOURCES = $(psyche_SOURCES)
 
 srcdir = @srcdir@
@@ -40,7 +41,8 @@ build_triplet = @build@
 host_triplet = @host@
 bin_PROGRAMS = psyche$(EXEEXT)
 subdir = src
-DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
+DIST_COMMON = $(noinst_HEADERS) $(srcdir)/Makefile.am \
+	$(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
@@ -52,7 +54,7 @@ am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
 am_psyche_OBJECTS = psyche.$(OBJEXT) error.$(OBJEXT) utils.$(OBJEXT) \
-	windows.$(OBJEXT) workspace.$(OBJEXT)
+	windows.$(OBJEXT) workspace.$(OBJEXT) events.$(OBJEXT)
 psyche_OBJECTS = $(am_psyche_OBJECTS)
 psyche_DEPENDENCIES =
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -68,6 +70,7 @@ LINK = $(LIBTOOL) --tag=CC --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
 	$(AM_LDFLAGS) $(LDFLAGS) -o $@
 SOURCES = $(psyche_SOURCES)
 DIST_SOURCES = $(psyche_SOURCES)
+HEADERS = $(noinst_HEADERS)
 ETAGS = etags
 CTAGS = ctags
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
@@ -167,7 +170,7 @@ sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
-psyche_SOURCES = psyche.c error.c utils.c windows.c workspace.c
+psyche_SOURCES = psyche.c error.c utils.c windows.c workspace.c events.c
 
 # set the include path found by configure
 INCLUDES = $(all_includes)
@@ -175,6 +178,7 @@ INCLUDES = $(all_includes)
 # the library search path.
 psyche_LDFLAGS = $(all_libraries) 
 psyche_LDADD = -lpanel -lcdk -lcurses
+noinst_HEADERS = events.h
 all: all-am
 
 .SUFFIXES:
@@ -247,6 +251,7 @@ distclean-compile:
 	-rm -f *.tab.c
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/error.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/events.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/psyche.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/windows.Po@am__quote@
@@ -360,7 +365,7 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(PROGRAMS)
+all-am: Makefile $(PROGRAMS) $(HEADERS)
 installdirs:
 	for dir in "$(DESTDIR)$(bindir)"; do \
 	  test -z "$$dir" || $(mkdir_p) "$$dir"; \

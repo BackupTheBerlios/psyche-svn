@@ -11,6 +11,7 @@ workspace_create(const char *name)
 	
 	new = (PSY_WSPACE *)xmalloc(sizeof(PSY_WSPACE));
 	new->name = strdup(name);
+	new->head = NULL;
 
 	return new;
 }
@@ -22,7 +23,7 @@ workspace_free(PSY_WSPACE *morituro)
 
 	cut = morituro->head;
 	
-	while (cut!=NULL) {
+	while (cut != NULL) {
 		window_del(cut);
 		cut->next;
 	}

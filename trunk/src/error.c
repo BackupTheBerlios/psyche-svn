@@ -1,7 +1,7 @@
 #include "psyche.h"
 #include "error.h"
 
-static void error (int exit_status, const char *mode, const char *message) ;
+static void error (int exit_status, const char *mode, const char *message);
 
 static void 
 error(int exit_status, const char *mode, const char *message)
